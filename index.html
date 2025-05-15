@@ -68,6 +68,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
+      padding-bottom: 10px;
     }
 
     .video-card:hover {
@@ -105,6 +106,28 @@
       flex-grow: 1;
     }
 
+    label.completed-label {
+      padding: 0 15px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    textarea.notes {
+      margin: 8px 15px 0;
+      width: calc(100% - 30px);
+      resize: vertical;
+      min-height: 50px;
+      font-size: 14px;
+      font-family: 'Roboto', Arial, sans-serif;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
     .subject-header {
       grid-column: 1 / -1;
       margin-top: 40px;
@@ -139,108 +162,184 @@
 <div class="container" id="videoContainer">
 
   <div class="subject-header">PSLP</div>
-  <div class="video-card" data-title="PSLP Unit 1">
+  <div class="video-card" data-id="pslp-unit-1" data-title="PSLP Unit 1">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/aRvyN1omlhc" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 1: PSLP</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="PSLP Unit 3">
+  <div class="video-card" data-id="pslp-unit-3" data-title="PSLP Unit 3">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/niDbghcNdS8" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 3: PSLP</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="PSLP Unit 4">
+  <div class="video-card" data-id="pslp-unit-4" data-title="PSLP Unit 4">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/OvqPjDcoD2Y" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 4: PSLP</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
 
   <div class="subject-header">JAVA</div>
-  <div class="video-card" data-title="Java Unit 1">
+  <div class="video-card" data-id="java-unit-1" data-title="Java Unit 1">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/4RJT4v0SRDU" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 1: Java</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="Java Unit 3">
+  <div class="video-card" data-id="java-unit-3" data-title="Java Unit 3">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/NQtPexFo1fc" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 3: Java</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="Java Unit 4">
+  <div class="video-card" data-id="java-unit-4" data-title="Java Unit 4">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/wSWOSrcJY74" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 4: Java</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
 
   <div class="subject-header">C&S</div>
-  <div class="video-card" data-title="C&S Unit 1">
+  <div class="video-card" data-id="cns-unit-1" data-title="C&S Unit 1">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/DQhxgvR--xI" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 1: C&amp;S</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="C&S Unit 3">
+  <div class="video-card" data-id="cns-unit-3" data-title="C&S Unit 3">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/ZliJLrVQaH4" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 3: C&amp;S</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="C&S Unit 4">
+  <div class="video-card" data-id="cns-unit-4" data-title="C&S Unit 4">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/I9W4AUrkwno" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 4: C&amp;S</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
 
   <div class="subject-header">TOC</div>
-  <div class="video-card" data-title="TOC Unit 1">
+  <div class="video-card" data-id="toc-unit-1" data-title="TOC Unit 1">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/nEX9A_uoCx8" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 1: TOC</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="TOC Unit 3">
+  <div class="video-card" data-id="toc-unit-3" data-title="TOC Unit 3">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/gniu2N3IP18" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 3: TOC</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="TOC Unit 4">
+  <div class="video-card" data-id="toc-unit-4" data-title="TOC Unit 4">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/Scz2dhk3eS8" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 4: TOC</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
 
   <div class="subject-header">DBMS</div>
-  <div class="video-card" data-title="DBMS Unit 1">
+  <div class="video-card" data-id="dbms-unit-1" data-title="DBMS Unit 1">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/ScWOVJAMMe8" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 1: DBMS</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="DBMS Unit 3">
+  <div class="video-card" data-id="dbms-unit-3" data-title="DBMS Unit 3">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/tNefa5yoXWo" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 3: DBMS</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
-  <div class="video-card" data-title="DBMS Unit 4">
+  <div class="video-card" data-id="dbms-unit-4" data-title="DBMS Unit 4">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/BKbioSP8ek4" allowfullscreen></iframe>
     </div>
     <div class="video-title">Unit 4: DBMS</div>
+    <label class="completed-label">
+      <input type="checkbox" class="completed-checkbox" />
+      Completed
+    </label>
+    <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
 
 </div>
 
 <script>
+  // Search filter
   const searchInput = document.getElementById('searchInput');
   const videoCards = document.querySelectorAll('.video-card');
 
@@ -253,6 +352,29 @@
       } else {
         card.style.display = 'none';
       }
+    });
+  });
+
+  // Checklist + notes persistence with localStorage
+  videoCards.forEach(card => {
+    const id = card.getAttribute('data-id');
+    if (!id) return;
+
+    const checkbox = card.querySelector('.completed-checkbox');
+    const notes = card.querySelector('.notes');
+
+    // Load saved states
+    checkbox.checked = localStorage.getItem(id + '-completed') === 'true';
+    notes.value = localStorage.getItem(id + '-notes') || '';
+
+    // Save checkbox changes
+    checkbox.addEventListener('change', () => {
+      localStorage.setItem(id + '-completed', checkbox.checked);
+    });
+
+    // Save notes on input
+    notes.addEventListener('input', () => {
+      localStorage.setItem(id + '-notes', notes.value);
     });
   });
 </script>

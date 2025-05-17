@@ -16,7 +16,7 @@
 
     body.dark {
       background-color: #121212;
-      color: #f1f1f1;
+      color: #e0e0e0;
     }
 
     header {
@@ -36,24 +36,34 @@
       user-select: none;
     }
 
-    .search-box {
-      margin-top: 10px;
+    .dark-toggle {
+      cursor: pointer;
+      background-color: #fff;
+      color: #ff0000;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      padding: 10px 20px;
+      font-weight: bold;
       display: flex;
       align-items: center;
+      gap: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
     }
 
-    .search-box input {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 20px;
-      outline: none;
-      font-size: 14px;
-      min-width: 220px;
-      transition: box-shadow 0.3s ease;
+    .dark-toggle:hover {
+      transform: scale(1.05);
     }
 
-    .search-box input:focus {
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    .dark-toggle .icon {
+      font-size: 24px;
+      animation: rotateIcon 2s linear infinite;
+    }
+
+    @keyframes rotateIcon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .container {
@@ -79,6 +89,7 @@
 
     body.dark .video-card {
       background-color: #1e1e1e;
+      box-shadow: 0 2px 8px rgb(255 255 255 / 0.05);
     }
 
     .video-card:hover {
@@ -111,8 +122,13 @@
       font-size: 16px;
       font-weight: 500;
       line-height: 1.3;
+      color: #030303;
       user-select: text;
       flex-grow: 1;
+    }
+
+    body.dark .video-title {
+      color: #e0e0e0;
     }
 
     label.completed-label {
@@ -148,29 +164,9 @@
       user-select: none;
     }
 
-    .dark-toggle {
-      cursor: pointer;
-      font-size: 14px;
-      padding: 8px 14px;
-      background: white;
-      color: black;
-      border: none;
-      border-radius: 20px;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark .dark-toggle {
-      background: #333;
-      color: white;
-    }
-
     @media (max-width: 400px) {
       .container {
         grid-template-columns: 1fr;
-      }
-      .search-box input {
-        width: 100%;
-        margin-top: 10px;
       }
     }
   </style>
@@ -179,13 +175,15 @@
 
 <header>
   <span>Semester 4 Resources</span>
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search videos...">
-    <button class="dark-toggle" id="toggleDark">Dark Mode</button>
-  </div>
+  <button class="dark-toggle" id="darkModeToggle">
+    <span class="icon" id="modeIcon">☀️</span>
+    Toggle Dark Mode
+  </button>
 </header>
 
 <div class="container" id="videoContainer">
+
+  <!-- other subjects remain unchanged -->
 
   <div class="subject-header">JAVA</div>
   <div class="video-card" data-id="java-unit-1" data-title="Java Unit 1">
@@ -199,6 +197,7 @@
     </label>
     <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
+
   <div class="video-card" data-id="java-unit-2" data-title="Java Unit 2">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/vEv_uYr5Yqk" allowfullscreen></iframe>
@@ -210,6 +209,7 @@
     </label>
     <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
+
   <div class="video-card" data-id="java-unit-3" data-title="Java Unit 3">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/vOTpZp7-_hM" allowfullscreen></iframe>
@@ -221,6 +221,7 @@
     </label>
     <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
+
   <div class="video-card" data-id="java-unit-4" data-title="Java Unit 4">
     <div class="thumbnail">
       <iframe src="https://www.youtube.com/embed/3XlTekglPek" allowfullscreen></iframe>
@@ -233,23 +234,31 @@
     <textarea class="notes" placeholder="Add your notes here..."></textarea>
   </div>
 
-  <!-- The rest of your subjects (PSLP, C&S, TOC, DBMS) go here unchanged -->
+  <!-- other subjects continue unchanged -->
+
 </div>
 
 <script>
-  // Search filter
-  const searchInput = document.getElementById('searchInput');
-  const videoCards = document.querySelectorAll('.video-card');
+  // Dark mode toggle
+  const darkToggle = document.getElementById('darkModeToggle');
+  const body = document.body;
+  const icon = document.getElementById('modeIcon');
 
-  searchInput.addEventListener('input', () => {
-    const term = searchInput.value.toLowerCase();
-    videoCards.forEach(card => {
-      const title = card.getAttribute('data-title').toLowerCase();
-      card.style.display = title.includes(term) ? 'flex' : 'none';
-    });
+  // Load state
+  if (localStorage.getItem('dark-mode') === 'true') {
+    body.classList.add('dark');
+    icon.textContent = '🌙';
+  }
+
+  darkToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    const isDark = body.classList.contains('dark');
+    localStorage.setItem('dark-mode', isDark);
+    icon.textContent = isDark ? '🌙' : '☀️';
   });
 
-  // Checklist + notes persistence
+  // Checklist + notes persistence with localStorage
+  const videoCards = document.querySelectorAll('.video-card');
   videoCards.forEach(card => {
     const id = card.getAttribute('data-id');
     if (!id) return;
@@ -268,19 +277,6 @@
       localStorage.setItem(id + '-notes', notes.value);
     });
   });
-
-  // Dark mode toggle
-  const toggleBtn = document.getElementById('toggleDark');
-  toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    const isDark = document.body.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
-
-  // Load saved theme
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark');
-  }
 </script>
 
 </body>

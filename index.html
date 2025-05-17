@@ -13,12 +13,10 @@
       color: #030303;
       transition: background-color 0.3s, color 0.3s;
     }
-
     body.dark-mode {
       background-color: #181818;
       color: #f9f9f9;
     }
-
     header {
       background-color: #ff0000;
       padding: 14px 20px;
@@ -30,12 +28,10 @@
       justify-content: space-between;
       flex-wrap: wrap;
     }
-
     header span {
       letter-spacing: 1px;
       user-select: none;
     }
-
     .toggle-dark-mode {
       font-size: 18px;
       padding: 14px 24px;
@@ -50,17 +46,26 @@
       font-weight: bold;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
     body.dark-mode .toggle-dark-mode {
       background-color: #333;
       color: #fff;
     }
-
     .toggle-dark-mode img {
       width: 28px;
       height: 28px;
     }
-
+    #progressTracker {
+      color: white;
+      background-color: #00000030;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-left: auto;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    body.dark-mode #progressTracker {
+      color: #fff;
+    }
     .container {
       max-width: 1280px;
       margin: 20px auto;
@@ -69,34 +74,29 @@
       grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
       gap: 20px;
     }
-
     .video-card {
       background-color: #f9f9f9;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.3s ease;
       display: flex;
       flex-direction: column;
       padding-bottom: 10px;
     }
-
     .video-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
-
     body.dark-mode .video-card {
       background-color: #282828;
     }
-
     .thumbnail {
       position: relative;
       padding-top: 56.25%;
       overflow: hidden;
       background-color: black;
     }
-
     .thumbnail iframe {
       position: absolute;
       top: 0; left: 0;
@@ -104,24 +104,14 @@
       height: 100%;
       border: none;
     }
-
     .video-title {
-      padding: 12px 15px 4px;
+      padding: 12px 15px;
       font-size: 16px;
       font-weight: 500;
       line-height: 1.3;
       color: inherit;
       user-select: text;
     }
-
-    .completed-checkbox {
-      padding: 0 15px 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-    }
-
     .subject-header {
       grid-column: 1 / -1;
       margin-top: 40px;
@@ -132,7 +122,13 @@
       color: #ff0000;
       user-select: none;
     }
-
+    .checkbox-wrapper {
+      padding: 0 15px 10px;
+    }
+    label {
+      font-size: 14px;
+      user-select: none;
+    }
     @media (max-width: 400px) {
       .container {
         grid-template-columns: 1fr;
@@ -144,6 +140,7 @@
 
 <header>
   <span>Semester 4 Resources</span>
+  <div id="progressTracker">0% Completed</div>
   <button class="toggle-dark-mode" id="darkModeToggle">
     <img id="modeIcon" src="https://img.icons8.com/ios-filled/50/000000/sun--v1.png" alt="Toggle Mode">
     Toggle Mode
@@ -155,13 +152,17 @@
 <script>
   const darkModeToggle = document.getElementById('darkModeToggle');
   const modeIcon = document.getElementById('modeIcon');
-
   const setModeIcon = () => {
-    if (document.body.classList.contains('dark-mode')) {
-      modeIcon.src = 'https://img.icons8.com/ios-filled/50/ffffff/crescent-moon.png';
-    } else {
-      modeIcon.src = 'https://img.icons8.com/ios-filled/50/000000/sun--v1.png';
-    }
+    modeIcon.src = document.body.classList.contains('dark-mode')
+      ? 'https://img.icons8.com/ios-filled/50/ffffff/crescent-moon.png'
+      : 'https://img.icons8.com/ios-filled/50/000000/sun--v1.png';
+  };
+
+  const updateProgress = () => {
+    const total = document.querySelectorAll('input[type="checkbox"]').length;
+    const checked = Array.from(document.querySelectorAll('input[type="checkbox"]')).filter(cb => cb.checked).length;
+    const percent = Math.round((checked / total) * 100);
+    document.getElementById('progressTracker').textContent = `${percent}% Completed`;
   };
 
   darkModeToggle.addEventListener('click', () => {
@@ -177,19 +178,15 @@
       { subject: "Java", title: "Java - Unit 2", url: "https://www.youtube.com/embed/vEv_uYr5Yqk" },
       { subject: "Java", title: "Java - Unit 3", url: "https://www.youtube.com/embed/vOTpZp7-_hM" },
       { subject: "Java", title: "Java - Unit 4", url: "https://www.youtube.com/embed/3XlTekglPek" },
-
       { subject: "DBMS", title: "DBMS - Unit 1", url: "https://www.youtube.com/embed/ScWOVJAMMe8" },
       { subject: "DBMS", title: "DBMS - Unit 3", url: "https://www.youtube.com/embed/tNefa5yoXWo" },
       { subject: "DBMS", title: "DBMS - Unit 4", url: "https://www.youtube.com/embed/BKbioSP8ek4" },
-
       { subject: "TOC", title: "TOC - Unit 1", url: "https://www.youtube.com/embed/nEX9A_uoCx8" },
       { subject: "TOC", title: "TOC - Unit 3", url: "https://www.youtube.com/embed/gniu2N3IP18" },
       { subject: "TOC", title: "TOC - Unit 4", url: "https://www.youtube.com/embed/Scz2dhk3eS8" },
-
       { subject: "C&S", title: "C&S - Unit 1", url: "https://www.youtube.com/embed/DQhxgvR--xI" },
       { subject: "C&S", title: "C&S - Unit 3", url: "https://www.youtube.com/embed/ZliJLrVQaH4" },
       { subject: "C&S", title: "C&S - Unit 4", url: "https://www.youtube.com/embed/I9W4AUrkwno" },
-
       { subject: "PSLP", title: "PSLP - Unit 1", url: "https://www.youtube.com/embed/aRvyN1omlhc" },
       { subject: "PSLP", title: "PSLP - Unit 3", url: "https://www.youtube.com/embed/niDbghcNdS8" },
       { subject: "PSLP", title: "PSLP - Unit 4", url: "https://www.youtube.com/embed/OvqPjDcoD2Y" },
@@ -219,15 +216,19 @@
       title.textContent = video.title;
 
       const checkboxWrapper = document.createElement('div');
-      checkboxWrapper.className = 'completed-checkbox';
-
+      checkboxWrapper.className = 'checkbox-wrapper';
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.id = `check-${index}`;
-
+      checkbox.id = `checkbox-${index}`;
+      checkbox.checked = localStorage.getItem(`video-${index}`) === 'true';
       const label = document.createElement('label');
-      label.htmlFor = `check-${index}`;
-      label.textContent = "Mark as completed";
+      label.setAttribute('for', `checkbox-${index}`);
+      label.textContent = 'Mark as completed';
+
+      checkbox.addEventListener('change', () => {
+        localStorage.setItem(`video-${index}`, checkbox.checked);
+        updateProgress();
+      });
 
       checkboxWrapper.appendChild(checkbox);
       checkboxWrapper.appendChild(label);
@@ -237,6 +238,8 @@
       card.appendChild(checkboxWrapper);
       container.appendChild(card);
     });
+
+    updateProgress();
   });
 </script>
 
